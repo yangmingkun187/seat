@@ -1,0 +1,121 @@
+;(function($) {
+    $.fn.seat_layout = function(options) {
+        'use strict';
+        var setting = $.extend({
+            seatForms: [
+                {colno:'A',rowno:'1',type: 1},
+                {colno:'B',rowno:'1',type: 1},
+                {colno:'C',rowno:'1',type: 0},
+                {colno:'D',rowno:'1',type: 1},
+                {colno:'E',rowno:'1',type: 1},
+                {colno:'B',rowno:'2',type: 1},
+                {colno:'C',rowno:'2',type: 0},
+                {colno:'A',rowno:'2',type: 1},
+                {colno:'D',rowno:'2',type: 1}
+            ],
+            col: 5,
+            row: 2,
+            sold: ['1D', '2B'],
+            tickets: 3
+        }, options);
+        var $this = $(this);
+        var html = '';
+        for (var i = 1; i <= setting.row; i++) {
+            var seat = '',rows='';
+
+            for (var j = 1; j <= setting.col; j++) {
+                var colNo = String.fromCharCode(j + 64);
+
+                if(isSameRows(setting.seatForms, i) && isSameCol(setting.seatForms, i, colNo)) {
+
+
+                    if(isSelected(setting.sold, i, colNo)) {
+                        seat += '<div class="seat-col selected" data = "'+ (i+colNo) + '">' + (i+colNo) + '</div>';
+                    } else if (isNone(setting.seatForms, i, colNo)){
+                        seat += '<div class="seat-col none"></div>';
+                    } else {
+                        seat += '<div class="seat-col" data = "'+ (i+colNo) + '">' + (i+colNo) + '</div>';
+                    }
+                } else {
+                    seat += '<div class="seat-col none"></div>';
+                }
+            }
+            rows += '<div class="seat-row">' +seat+'</div>';
+            html += rows;
+        }
+        $this.append(html);
+
+        function isSameCol(arrays, i, colNo) {
+            var isExsit;
+            for(var l = 0; l < arrays.length; l++) {
+                if(arrays[l].colno == colNo && arrays[l].rowno == i) {
+                    isExsit = true;
+                }
+            }
+            return isExsit;
+        }
+
+        function isSameRows(arrays, i) {
+            var isExsit = false;
+            for(var x = 0; x < arrays.length; x++) {
+                if (arrays[x].rowno == i) {
+                    isExsit = true;
+                }
+            }
+            return isExsit;
+        }
+
+        function isSelected(arrays, i, colNo) {
+            var isSelected = false;
+            for(var a = 0; a < arrays.length; a++) {
+                if(arrays[a] === i + colNo) {
+                    isSelected = true;
+                }
+            }
+            return isSelected;
+        }
+
+        function isNone(arrays, i, colNo) {
+            var isNone = false;
+            for(var b = 0; b < arrays.length; b++) {
+                if(i == arrays[b].rowno && colNo == arrays[b].colno && arrays[b].type == 0) {
+                    isNone = true;
+                }
+            }
+            return isNone;
+        }
+        $(this).find('.seat-col').not('.selected, .none').click(function() {
+            if(setting.tickets > 0){
+                if($(this).hasClass('locked')) {
+                    $(this).removeClass('locked');
+                    $(this).html($(this).attr('data'));
+                    setting.tickets++;
+                } else {
+                    $(this).addClass('locked');
+                    $(this).html('我');
+                    setting.tickets--;
+                }
+            } else {
+                if($(this).hasClass('locked')) {
+                    $(this).removeClass('locked');
+                    $(this).html($(this).attr('data'));
+                    setting.tickets++;
+                }
+            }
+        });
+
+
+        var layout = function() {
+            var lockedSeat = [];
+
+            $this.find('.locked').each(function(index,el){
+                lockedSeat.push($(el).attr('data'));
+            });
+            return lockedSeat;
+        };
+
+        return {
+            layout: layout
+        }
+    };
+})(jQuery);

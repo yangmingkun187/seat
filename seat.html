@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<title>导入订单</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <link href="/img/logo.ico" rel="icon" type="image/x-icon" />
+	    <style>
+	    	*{margin:0;padding-top:0}html,body{width:100%}body{background-color:#ebebeb}header{padding:0 10px;color:#5eb95e;height:40px;line-height:39px;box-sizing:border-box;border-bottom:1px solid #d8d8d8}.seat-wrap{padding:10px;max-width:1000px;width:100%;box-sizing:border-box;margin:0 auto;margin-bottom:20px}.seat{margin:37px auto}.seat-header{margin:0 auto 20px auto;height:48px;width:100%;line-height:48px;color:#737373;border:1px solid #d8d8d8;box-sizing:border-box;text-align:center;border-top-left-radius:20px;border-top-right-radius:20px}.seat-footer{margin:40px auto 30px auto;border:1px solid #d8d8d8;color:#737373;width:100%;height:64px;line-height:64px;text-align:center;border-bottom-left-radius:20px;border-bottom-right-radius:20px}.seat-content{margin:0 auto;padding:0 10px;width:100%;box-sizing:border-box}.seat-row:after{clear:both;content:'';display:block;visibility:hidden}.seat-row{margin-top:10px}.seat-col{float:left;cursor:pointer;box-sizing:border-box;background-color:white;border:1px solid #d8d8d8;margin-left:10px;color:#737373;text-align:center; width:150px;height: 150px}.seat-col:first-child{margin-left:0}.seat-col.none{border:none;background-color:#ebebeb;cursor:default}.seat-col.selected{background-color:#d71345;color:white;cursor:default}.seat-col.locked{background-color:#43a047;color:white;cursor:default}footer{position:fixed;z-index:10;bottom:0;height:50px;left:0;right:0}footer button{border:none;height:50px;width:100%;text-align:center;background-color:#5eb95e;color:white;font-size:16px}
+			.seat_col {float: left} .seat-col:after{clear:both}
+	    </style>
+	</head>    
+	<body>
+		<header>
+			点击下图中座位进行选择...
+		</header>
+		<div class="seat-wrap">
+			<div class="seat">
+		        <div class="seat-header">
+		            车头
+		        </div>
+        		<div class="seat-content">
+                    <!--<div class="seat-row">-->
+                        <!--<div class="seat-col" data="1A">1A</div>-->
+                        <!--<div class="seat-col locked" data="1B">我</div>-->
+                        <!--<div class="seat-col none"></div>-->
+                        <!--<div class="seat-col selected" data="1D">1D</div>-->
+                        <!--<div class="seat-col" data="1E">1E</div>-->
+                	<!--</div>-->
+        		</div>
+		        <div class="seat-footer">
+		            车尾
+		        </div>
+		        <input class="identity" type="hidden" value="">
+		        <input type="hidden" class="identityNew" value="1B">
+		    </div>
+		</div>
+		<footer>
+			<button id='comfirm'>确认选座</button>
+		</footer>
+		<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/seat-control"></script>
+		<script>
+			$(document).ready(function() {
+				var seats = $('.seat-content').seat_layout({}); //这里的{}为需要传入的数据，格式为seat-control里的格式
+				$('#comfirm').click(function() {
+					alert(seats.layout());
+				});
+			});
+
+		</script>
+	</body>
+</html>	
