@@ -11,10 +11,21 @@
                 {colno:'B',rowno:'2',type: 1},
                 {colno:'C',rowno:'2',type: 0},
                 {colno:'A',rowno:'2',type: 1},
-                {colno:'D',rowno:'2',type: 1}
+                {colno:'D',rowno:'2',type: 1},
+                {colno:'E',rowno:'2',type: 1},
+                {colno:'A',rowno:'3',type: 1},
+                {colno:'B',rowno:'3',type: 1},
+                {colno:'C',rowno:'3',type: 0},
+                {colno:'D',rowno:'3',type: 1},
+                {colno:'E',rowno:'3',type: 1},
+                {colno:'A',rowno:'4',type: 1},
+                {colno:'B',rowno:'4',type: 1},
+                {colno:'C',rowno:'4',type: 0},
+                {colno:'D',rowno:'4',type: 1},
+                {colno:'E',rowno:'4',type: 1},
             ],
             col: 5,
-            row: 2,
+            row: 10,
             sold: ['1D', '2B'],
             tickets: 3
         }, options);
